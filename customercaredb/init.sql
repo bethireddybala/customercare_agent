@@ -25,7 +25,7 @@ CREATE TYPE channel AS ENUM (
 -- PRODUCT CATALOG
 -- ============================================================
 
-CREATE TABLE product_categories (
+CREATE TABLE products (
     product_id         SERIAL PRIMARY KEY,
     sku                VARCHAR(50) UNIQUE NOT NULL,
     category           VARCHAR(100) NOT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE product_categories (
 -- 50 PRODUCTS
 -- ============================================================
 
-INSERT INTO product_categories
+INSERT INTO products
 (sku, category, brand, name, model_number, warranty_months, price)
 VALUES
 
@@ -496,42 +496,3 @@ GROUP BY
     a.full_name,
     a.support_level,
     a.department;
-
--- ============================================================
--- DOCKER INIT USAGE
--- ============================================================
-
--- Save this file as:
---
--- ./db/init/01_customer_care.sql
---
--- docker-compose.yml:
---
--- version: '3.9'
---
--- services:
---   postgres:
---     image: postgres:16
---     container_name: customer-care-db
---
---     environment:
---       POSTGRES_DB: customer_care
---       POSTGRES_USER: postgres
---       POSTGRES_PASSWORD: postgres
---
---     ports:
---       - "5432:5432"
---
---     volumes:
---       - ./db/init:/docker-entrypoint-initdb.d
---
--- ============================================================
--- START DATABASE
--- ============================================================
---
--- docker compose up -d
---
--- PostgreSQL automatically executes this SQL file
--- during container startup.
---
--- ============================================================
