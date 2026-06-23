@@ -25,7 +25,7 @@ from nodes import (
 )
 
 
-def build_customer_care_graph():
+def build_customer_care_graph(checkpointer=None):
     """Build and compile the customer care workflow graph.
 
     The workflow performs the following high-level steps:
@@ -36,6 +36,14 @@ def build_customer_care_graph():
     4. Decide the next workflow action.
     5. Route to resolution, ticket creation, or human review.
     6. Generate a final customer-facing response.
+
+    Args:
+        checkpointer: Optional LangGraph checkpointer used to persist
+            state between invocations. Required for the human-review
+            interrupt to be resumable across separate calls (e.g. from
+            an API server). Defaults to ``None``, which keeps the
+            previous behaviour for ``langgraph dev`` / LangGraph
+            Platform, which provide their own persistence layer.
 
     Returns:
         CompiledStateGraph: Compiled LangGraph workflow ready for
@@ -71,7 +79,7 @@ def build_customer_care_graph():
     builder.add_edge("create_ticket", "ticket_created_response")
     builder.add_edge("ticket_created_response", END)
     builder.add_edge("human_review", "create_ticket")
-    return builder.compile()
+    return builder.compile(checkpointer=checkpointer)
 
 
 graph = build_customer_care_graph()

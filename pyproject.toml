@@ -1,10 +1,11 @@
 [project]
 name = "customercare-agent"
 version = "0.1.0"
-description = "Add your description here"
+description = "description = "Agentic AI customer care system that classifies complaints, queries a support database via a LangChain SQL agent, and creates tickets through a LangGraph workflow with human-in-the-loop escalation, exposed over a FastAPI HTTP API.""
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
+    "fastapi>=0.138.0",
     "google-genai>=1.75.0",
     "langchain>=1.2.18",
     "langchain-community>=0.4.1",
@@ -16,4 +17,5 @@ dependencies = [
     "psycopg2-binary>=2.9.12",
     "python-dotenv>=1.2.2",
     "sqlalchemy>=2.0.49",
+    "uvicorn[standard]>=0.49.0",
 ]
