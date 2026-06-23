@@ -52,7 +52,7 @@ class CustomerCareState(TypedDict, total=False):
     Attributes:
         customer_email: Customer email address.
         customer_name: Customer name.
-        product_hint: Product identifier provided by the customer.
+        product_name: Product identifier provided by the customer.
         complaint_text: Original customer complaint.
         channel: Communication channel (email, chat, phone, etc.).
 
@@ -90,9 +90,9 @@ class CustomerCareState(TypedDict, total=False):
     """
 
     # Input
-    customer_email: Optional[str]
     customer_name: Optional[str]
-    product_hint: Optional[str]
+    customer_email: Optional[str]
+    product_name: Optional[str]
     complaint_text: str
     channel: str
 
